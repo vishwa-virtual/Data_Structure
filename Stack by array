@@ -1,0 +1,58 @@
+
+#include<stdio.h>
+#define max 5
+int s[max];
+int top=-1;
+void push(value){
+    if(top==max-1){
+        printf("stack is full");
+    }
+    else{
+      s[++top]=value;
+    }
+}  
+int pop(){
+    if(top==-1){
+        printf("the stack is empty");
+    }
+    else{
+        return s[top--];
+    }
+    return 0;
+ } 
+ void display(value) 
+ {
+     if(top==-1) {
+         printf("cannot display stack is empty\n");   
+     }
+     else{
+         for(int i=top;i>=0;i--) {
+             printf("%d\t",s[top]);
+         }    
+     }
+ }
+ int main(){
+     int choice, value;
+     do{
+         printf("1.Push\t\t2.Pop\t\t3.Display\n");
+         printf("enter the choice:");
+         scanf("%d",&choice);
+         switch(choice) {
+             case 1:
+                 printf("enter the value to insert:\n");
+                 scanf("%d",&value);
+                 push(value);
+                 break;
+             case 2:
+                 printf("poping the last node\n");
+                 pop();
+                 break;
+             case 3:
+                 printf("Displaying the stack\n");   
+                 display(value);
+                 break;
+             default:
+                 printf("Invalid choice");
+         }
+     }while(choice!=0);   
+ }
