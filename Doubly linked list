@@ -1,0 +1,85 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *head=NULL;
+void insertatfront()
+{
+    int d;
+    printf("enter the value to insert at front:");
+    scanf("%d",&d);
+    struct node *new=(struct node*)malloc(sizeof(struct node));
+    if(new==NULL){
+        printf("memory is not asllocated properly");
+    }
+    else{
+        new->prev=NULL;
+        new->data=d;
+        new->next=head;
+        head=new;
+    }
+}
+void insertatend(){
+    int d;
+    printf("enter the value to insert at end:");
+    scanf("%d",&d);
+    struct node *new=(struct node*)malloc(sizeof(struct node));
+    new->data=d;
+    new->next=NULL;
+    if(new==NULL){
+        printf("the memory is not allocatd properly");
+    }
+    else{
+        while(head->next!=NULL){
+            head=head->next;
+        }
+        head->next=new;
+        new->prev=head;
+    }
+}
+void insertatmiddle(){
+    int d,pos;
+    struct node *temp;
+    printf("enter the position to insert:");
+    scanf("%d",&d);
+    printf("enter the position:");
+    scanf("%d",&pos);
+    struct node *new=(struct node*)malloc(sizeof(struct node));
+    new->data=d;
+    temp=head;
+    if(new==NULL){
+        printf("the memory is not allocate properly");
+        return;
+    }
+    else{
+        if (pos==1){
+            printf("the ")
+        }
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        new->next=temp->next;
+        new->prev=temp;
+        new->next=new;
+    }
+}
+void display(){
+    struct node *temp=head;
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+int main(){
+    insertatfront();
+    display();
+    insertatend();
+    display();
+    insertatmiddle();
+    display();
+}
