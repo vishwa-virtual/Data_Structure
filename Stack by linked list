@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 5
+int top = -1;
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void push(int n) {
+    struct node *new = (struct node*)malloc(sizeof(struct node));
+    new->data = n;
+    new->next = head;
+    head = new;
+    ++top;
+}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack is empty. Cannot delete.\n");
+    } else {
+        struct node *temp = head;
+        head = head->next;
+        free(temp);
+        --top; // Decrement top after popping
+        if (top == -1) { // If stack is now empty
+            head = NULL; // Ensure head is NULL
+        }
+    }
+}
+
+void display() {
+    if (top == -1) {
+        printf("Stack is empty. Cannot display.\n");
+    } else {
+        struct node *current = head;
+        while (current != NULL) {
+            printf("%d\t\t", current->data);
+            current = current->next;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, n;
+    do {
+        printf("1.Push\n2.Pop\n3.Display\n0.Exit\n");
+        printf("Enter the choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter the element to insert: ");
+                scanf("%d", &n);
+                push(n);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 0:
+                break; // Exit the loop
+            default:
+                printf("Invalid choice\n");
+        }
+    } while (choice != 0);
+    return 0;
+}
